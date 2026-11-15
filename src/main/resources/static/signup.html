@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign up - Daily Expenses</title>
+<script>document.documentElement.dataset.theme=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')</script>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="auth-body">
+<div class="auth-wrap">
+<section class="auth-brand">
+<div class="brand"><span class="brand-mark">₹</span><span>Daily Expenses</span></div>
+<div>
+<h1>Start tracking in a minute.</h1>
+<p>Create your account and add your first expense. Nobody else can see your expenses, goals or subscriptions.</p>
+</div>
+<small>Personal spending dashboard</small>
+</section>
+<section class="auth-panel">
+<form class="auth-card" id="signupForm" novalidate>
+<h2>Create your account</h2>
+<p class="auth-sub">It only takes a few details.</p>
+<div class="auth-error" id="authError" role="alert" hidden></div>
+<label>Full name<input id="fullName" autocomplete="name" maxlength="100" required autofocus></label>
+<label>Username<input id="username" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="30" placeholder="letters, numbers, . or _" required></label>
+<label>Password<span class="pw-field"><input id="password" type="password" autocomplete="new-password" maxlength="64" placeholder="At least 6 characters" required><button type="button" class="pw-toggle" data-pw="password">Show</button></span></label>
+<label>Confirm password<span class="pw-field"><input id="confirm" type="password" autocomplete="new-password" maxlength="64" required><button type="button" class="pw-toggle" data-pw="confirm">Show</button></span></label>
+<button type="submit" class="primary-button wide" id="submitBtn">Create account</button>
+<p class="auth-switch">Already have an account? <a href="/login.html">Log in</a></p>
+</form>
+</section>
+</div>
+<script src="/auth.js"></script>
+</body>
+</html>

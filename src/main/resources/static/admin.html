@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Daily Expenses</title>
+<script>document.documentElement.dataset.theme=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')</script>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+<div class="brand"><span class="brand-mark">₹</span><span>Daily Expenses</span></div>
+<div class="side-label">ADMIN</div>
+<a class="nav-link active" href="/admin.html"><svg class="ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></svg> <span>Users</span></a>
+<a class="nav-link" href="/"><svg class="ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M16 15h2"/></svg> <span>My expenses</span></a>
+<div class="profile"><div class="avatar" id="avatar">AD</div><div><strong id="profName">Admin</strong><small>Administrator</small></div></div>
+<div class="side-actions"><a class="side-link m-only" href="/">My expenses</a><button class="side-link" id="logoutBtn" type="button">Log out</button></div>
+</aside>
+<main class="main-content">
+<header class="topbar"><div><p class="eyebrow">ADMIN PANEL</p><h1>User management</h1><p class="subheading">Create accounts, turn them on or off and reset passwords.</p></div><div class="top-actions"><button class="secondary-button" id="themeBtn" type="button">Dark mode</button><button class="primary-button" id="addUserBtn" type="button">Create user</button></div></header>
+<section class="stats-grid">
+<article class="stat-card"><div class="stat-top"><span>Total users</span></div><div class="stat-value" id="statTotal">0</div><div class="stat-foot">All accounts including admins</div></article>
+<article class="stat-card"><div class="stat-top"><span>Active</span></div><div class="stat-value" id="statActive">0</div><div class="stat-foot">Can log in right now</div></article>
+<article class="stat-card"><div class="stat-top"><span>Turned off</span></div><div class="stat-value" id="statOff">0</div><div class="stat-foot">Blocked from logging in</div></article>
+</section>
+<section class="content-card">
+<div class="section-heading"><div><h2>All users</h2><p>Turn the switch off to block someone. Their data is kept and comes back when you turn it on.</p></div><div class="toolbar"><input id="userSearch" type="search" placeholder="Search users"><select id="statusFilter"><option value="">All users</option><option value="on">Active</option><option value="off">Turned off</option></select></div></div>
+<div class="table-wrap"><table><thead><tr><th>User</th><th>Role</th><th>Access</th><th>Expenses</th><th>Joined</th><th>Last login</th><th>Actions</th></tr></thead><tbody id="userRows"><tr><td colspan="7" class="empty-state">Loading users...</td></tr></tbody></table></div>
+</section>
+<footer>Daily Expenses <span>•</span> Admin panel</footer>
+</main>
+</div>
+
+<div class="modal-backdrop" id="createBackdrop" hidden>
+<div class="modal">
+<div class="modal-heading"><div><p class="eyebrow">NEW ACCOUNT</p><h2>Create user</h2></div><button class="close-button" type="button" data-close="createBackdrop" aria-label="Close">×</button></div>
+<form id="createForm" novalidate>
+<div class="auth-error" id="createError" role="alert" hidden></div>
+<label>Full name<input id="newName" maxlength="100" required></label>
+<div class="form-row"><label>Username<input id="newUsername" autocapitalize="none" spellcheck="false" maxlength="30" placeholder="letters, numbers, . or _" required></label><label>Role<select id="newRole"><option value="USER">User</option><option value="ADMIN">Admin</option></select></label></div>
+<label>Password<input id="newPassword" type="text" autocomplete="off" maxlength="64" placeholder="At least 6 characters" required></label>
+<div class="form-actions"><button type="button" class="secondary-button" data-close="createBackdrop">Cancel</button><button type="submit" class="primary-button">Create user</button></div>
+</form>
+</div>
+</div>
+
+<div class="modal-backdrop" id="resetBackdrop" hidden>
+<div class="modal">
+<div class="modal-heading"><div><p class="eyebrow">RESET PASSWORD</p><h2 id="resetTitle">New password</h2></div><button class="close-button" type="button" data-close="resetBackdrop" aria-label="Close">×</button></div>
+<form id="resetForm" novalidate>
+<div class="auth-error" id="resetError" role="alert" hidden></div>
+<input type="hidden" id="resetId">
+<label>New password<input id="resetPassword" type="text" autocomplete="off" maxlength="64" placeholder="At least 6 characters" required></label>
+<div class="form-actions"><button type="button" class="secondary-button" data-close="resetBackdrop">Cancel</button><button type="submit" class="primary-button">Save password</button></div>
+</form>
+</div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="/admin.js"></script>
+</body>
+</html>
